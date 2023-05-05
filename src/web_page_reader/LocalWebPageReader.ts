@@ -24,4 +24,4 @@ export class LocalWebPageReader implements DataReader {
         const data = await this.loadData();
         return data.split(',').length - 1;
     }
-    }
+}

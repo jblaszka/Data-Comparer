@@ -29,7 +29,7 @@ export class AppService {
   compareBooks(): Promise<string> {
     const comparer = new DataComparer(
       new RemoteWebPageReader('https://wolnelektury.pl/media/book/pdf/pan-tadeusz.pdf'),
-      new LocalWebPageReader('project\books\pan-tadeusz.pdf')
+      new LocalWebPageReader('books/pan-tadeusz.pdf')
     );
 
     const spaces = comparer.compareNumberOfSpaces();

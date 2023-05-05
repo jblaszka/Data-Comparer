@@ -7,54 +7,48 @@ export class DataComparer{
     constructor(firstDataToCompare: DataReader, secondDataToCompare: DataReader){
         this.firstDataToCompare = firstDataToCompare;
         this.secondDataToCompare = secondDataToCompare;
-    }
+    } 
 
     async compareNumberOfSpaces(): Promise<string> {
-        const firstNumberOfSpaces = await this.firstDataToCompare.numberOfSpaces();
-        const secondNumberOfSpaces = await this.secondDataToCompare.numberOfSpaces();
-
-        if(firstNumberOfSpaces > secondNumberOfSpaces){
-            return `${firstNumberOfSpaces} > ${secondNumberOfSpaces}`;
-        } 
-        else if(firstNumberOfSpaces < secondNumberOfSpaces){
-            return `${firstNumberOfSpaces} < ${secondNumberOfSpaces}`;
-        }        
-        else if(firstNumberOfSpaces == secondNumberOfSpaces){
-            return `${firstNumberOfSpaces} = ${secondNumberOfSpaces}`;
-        }
-        else return `Some problem with spaces. First: ${firstNumberOfSpaces} Second: ${secondNumberOfSpaces}`;
+        const firstNumberOfSpaces = await this.getNumberOfSpaces(this.firstDataToCompare);
+        const secondNumberOfSpaces = await this.getNumberOfSpaces(this.secondDataToCompare);
+    
+        return this.compare(firstNumberOfSpaces, secondNumberOfSpaces, "spaces");
     }
-
+    
     async compareNumberOfDots(): Promise<string> {
-        const firstNumberOfDots = await this.firstDataToCompare.numberOfDots();
-        const secondNumberOfDots = await this.secondDataToCompare.numberOfDots();
-
-        if(firstNumberOfDots > secondNumberOfDots){
-            return `${firstNumberOfDots} > ${secondNumberOfDots}`;
-        } 
-        else if(firstNumberOfDots < secondNumberOfDots){
-            return `${firstNumberOfDots} < ${secondNumberOfDots}`;
-        }        
-        else if(firstNumberOfDots == secondNumberOfDots){
-            return `${firstNumberOfDots} = ${secondNumberOfDots}`;
-        }
-        else return `Some problem with dots. First: ${firstNumberOfDots} Second: ${secondNumberOfDots}`;
+        const firstNumberOfDots = await this.getNumberOfDots(this.firstDataToCompare);
+        const secondNumberOfDots = await this.getNumberOfDots(this.secondDataToCompare);
+    
+        return this.compare(firstNumberOfDots, secondNumberOfDots, "dots");
     }
-
+    
     async compareNumberOfCommas(): Promise<string> {
-        const firstNumberOfCommas = await this.firstDataToCompare.numberOfCommas();
-        const secondNumberOfCommas = await this.secondDataToCompare.numberOfCommas();
-
-        if(firstNumberOfCommas > secondNumberOfCommas){
-            return `${firstNumberOfCommas} > ${secondNumberOfCommas}`;
-        } 
-        else if(firstNumberOfCommas < secondNumberOfCommas){
-            return `${firstNumberOfCommas} < ${secondNumberOfCommas}`;
-        }        
-        else if(firstNumberOfCommas == secondNumberOfCommas){
-            return `${firstNumberOfCommas} = ${secondNumberOfCommas}`;
-        }
-        else return `Some problem with commas. First: ${firstNumberOfCommas} Second: ${secondNumberOfCommas}`;
+        const firstNumberOfCommas = await this.getNumberOfCommas(this.firstDataToCompare);
+        const secondNumberOfCommas = await this.getNumberOfCommas(this.secondDataToCompare);
+    
+        return this.compare(firstNumberOfCommas, secondNumberOfCommas, "commas");
+    }
+    
+    private async getNumberOfSpaces(dataReader: DataReader): Promise<number> {
+        return dataReader.numberOfSpaces();
+    }
+    
+    private async getNumberOfDots(dataReader: DataReader): Promise<number> {
+        return dataReader.numberOfDots();
+    }
+    
+    private async getNumberOfCommas(dataReader: DataReader): Promise<number> {
+        return dataReader.numberOfCommas();
     }
 
+    private compare(first: number, second: number, name: string): string {
+        if(first > second){
+            return `${name} is greater than ${second}`;
+        } else if (first < second) {
+            return `${name} is less than ${second}`;
+        } else {
+            return `${name} is equal to ${second}`;
+        }
+    }   
 }
