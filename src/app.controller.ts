@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getDaysSinceAGHFoundation();
+  getCompareBook(): Promise<string> {
+    return this.appService.compareBooks();
   }
 }
