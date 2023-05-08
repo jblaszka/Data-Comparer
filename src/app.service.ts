@@ -7,7 +7,7 @@ import { RemoteWebPageReader } from './web_page_reader/RemoteWebPageReader';
 export class AppService {
   private daysSinceAGHFoundation: number;
 
-  compareBooks(): Promise<string> {
+  async compareBooks(): Promise<string> {
     const comparer = new DataComparer(
       new RemoteWebPageReader('https://wolnelektury.pl/media/book/pdf/pan-tadeusz.pdf'),
       new LocalWebPageReader('books/pan-tadeusz.pdf')
@@ -17,8 +17,7 @@ export class AppService {
     const dots = comparer.compareNumberOfDots();
     const commas = comparer.compareNumberOfCommas();
   
-    return Promise.all([spaces, dots, commas]).then(([spacesResult, dotsResult, commasResult]) => {
-      return `${spacesResult} | ${dotsResult} | ${commasResult}`;
-    });
+    const [spacesResult, dotsResult, commasResult] = await Promise.all([spaces, dots, commas]);
+    return `${spacesResult} | ${dotsResult} | ${commasResult}`;
   }
 }

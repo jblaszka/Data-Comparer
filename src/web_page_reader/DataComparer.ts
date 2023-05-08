@@ -1,13 +1,11 @@
 import { DataReader } from "./DataReader";
 
 export class DataComparer{
-    private firstDataToCompare: DataReader;
-    private secondDataToCompare: DataReader;
 
-    constructor(firstDataToCompare: DataReader, secondDataToCompare: DataReader){
-        this.firstDataToCompare = firstDataToCompare;
-        this.secondDataToCompare = secondDataToCompare;
-    } 
+    constructor(
+        private readonly firstDataToCompare: DataReader,
+        private readonly secondDataToCompare: DataReader
+        ){} 
 
     async compareNumberOfSpaces(): Promise<string> {
         const firstNumberOfSpaces = await this.getNumberOfSpaces(this.firstDataToCompare);

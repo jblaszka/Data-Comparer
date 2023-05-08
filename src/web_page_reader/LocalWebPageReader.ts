@@ -1,7 +1,8 @@
-import axios from 'axios';
 import * as fs from 'fs';
 import { DataReader } from './DataReader';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class LocalWebPageReader implements DataReader {
     constructor(private readonly filePath: string) {}
 

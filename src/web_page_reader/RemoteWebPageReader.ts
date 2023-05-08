@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { DataReader } from './DataReader';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class RemoteWebPageReader implements DataReader {
     constructor(private readonly url: string) {}
   
@@ -22,5 +24,5 @@ export class RemoteWebPageReader implements DataReader {
     async numberOfCommas(): Promise<number> {
       const data = await this.loadData();
       return data.split(',').length - 1;
-    }
+    } 
   }
