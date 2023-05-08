@@ -5,7 +5,6 @@ import { RemoteWebPageReader } from './web_page_reader/RemoteWebPageReader';
 
 @Injectable()
 export class AppService {
-  private daysSinceAGHFoundation: number;
 
   async compareBooks(): Promise<string> {
     const comparer = new DataComparer(
